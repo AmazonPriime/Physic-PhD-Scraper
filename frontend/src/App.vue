@@ -9,7 +9,7 @@
   <div v-if="loading" class="loading">
     Loading PhD listings...
     <br />
-    Takes about 30s to a minute :)
+    Takes about one to two minutes :)
   </div>
   <ListingContainer v-else :jobs="jobs"/>
 </template>
@@ -67,7 +67,7 @@ export default {
 }
 
 body {
-  background-image: url('https://assets.stickpng.com/images/58f37747a4fa116215a92414.png');
+  background-image: url('./assets/rick_morty.png');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: bottom;
