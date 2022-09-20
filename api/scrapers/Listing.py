@@ -1,3 +1,4 @@
+from distutils.command.clean import clean
 import re
 
 def clean_spaces(string):
@@ -21,6 +22,7 @@ class Listing:
             'employer': clean_spaces(self.employer),
             'location': clean_spaces(self.location),
             'salary': clean_spaces(self.salary),
+            'description': clean_spaces(self.description),
             'date_placed': clean_spaces(self.date_placed),
             'date_closes': clean_spaces(self.date_closes)
         }

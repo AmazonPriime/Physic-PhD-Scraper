@@ -11,3 +11,7 @@ class SiteUrls:
     ACADEMICPOSITIONS = 'https://academicpositions.com/find-jobs?positions[0]=phd&fields[0]=physics&locations[0]=europe&languages[0]=en'
     ACADEMICPOSITIONS_ROOT = 'https://academicpositions.com'
 
+    POSTGRADUATESTUDENTSHIPS = 'https://www.postgraduatestudentships.co.uk/funding-opportunities/study/phd-other-doctoral-study-funding/applicant/uk-applicants-only/organisation/all/subject/physics/region/all/pn/1/'
+    POSTGRADUATESTUDENTSHIPS_ROOT = 'https://www.postgraduatestudentships.co.uk'
+
+

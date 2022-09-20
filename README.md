@@ -15,8 +15,11 @@ Sample of sites which will be used in the search API.
     * [Physics](https://academicpositions.com/find-jobs?positions[0]=phd&fields[0]=physics&locations[0]=europe)
 * [Euaxess](https://euraxess.ec.europa.eu/jobs/search)
     * [Physics](https://euraxess.ec.europa.eu/jobs/search/field_research_field/physics-344)
+    * Found to not be as useful as the other ones that are implemented
 * [Postgraduate Studentships](https://www.postgraduatestudentships.co.uk/)
-    * [Physics](https://www.postgraduatestudentships.co.uk/funding-opportunities/study/phd-other-doctoral-study-funding/applicant/all/organisation/all/subject/physics/region/all/pn/1/)
+    * [Physics](https://www.postgraduatestudentships.co.uk/funding-opportunities/study/phd-other-doctoral-study-funding/applicant/uk-applicants-only/organisation/all/subject/physics/region/all/pn/1/)
+    * Filtered out all the sponsored listings
+    * Doesn't provide too much information but have included it anyway
 
 ### Technology / Project Description
 API will query these websites along with a query if the website allows it, otherwise the API will filter the results based on the chosen query (will try to obtain all from the category then filter). Then the API will return these to the API requester in a JSON format, each with a url to the post, title, location etc all the data that was available from the sites.
