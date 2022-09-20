@@ -1,30 +1,41 @@
 <template>
-  <div class="listings-container">
-    <div v-for="job in jobs" class="listing" v-bind:key="job.link">
-      <span class="title">
-        {{ job.title }}
-      </span>
-      <span class="employer">
-        Employer: <i>{{ job.employer }}</i>
-      </span>
-      <span class="description">
-        {{ job.description }}
-      </span>
-      <span class="location">
-        Location: <i>{{ job.location }}</i>
-      </span>
-      <span class="salary">
-        Salary: <i>{{ job.salary }}</i>
-      </span>
-      <span class="date">
-        Opened: <i>{{ job.date_placed }}</i>
-      </span>
-      <span class="date">
-        Closes: <i>{{ job.date_closes }}</i>
-      </span>
-      <a :href="job.link" target="_blank">
-        Show Listing
-      </a>
+  <div>
+    <div class="search-details">
+      Found <b>{{ jobs.length }}</b> positions!
+    </div>
+    <div class="listings-container">
+      <div v-for="job in jobs" class="listing" v-bind:key="job.link">
+        <span class="title">
+          {{ job.title }}
+        </span>
+        <span class="employer">
+          Employer: <i>{{ job.employer }}</i>
+        </span>
+        <span class="description">
+          {{ job.description }}
+        </span>
+        <span class="location">
+          Location: <i>{{ job.location }}</i>
+        </span>
+        <span class="salary">
+          Salary: <i>{{ job.salary }}</i>
+        </span>
+        <span class="date">
+          Opened: <i>{{ job.date_placed }}</i>
+        </span>
+        <span class="date">
+          Closes: <i>{{ job.date_closes }}</i>
+        </span>
+        <span>
+          Website:
+          <a :href="job.link" class="inner-link">
+            <b>{{ job.link.match(/^https?\:\/\/([^\/?#]+)(?:[\/?#]|$)/i)[1] }}</b>
+          </a>
+        </span>
+        <a :href="job.link" target="_blank" class="button">
+          Show Listing
+        </a>
+      </div>
     </div>
   </div>
 </template>
@@ -39,6 +50,9 @@ export default {
 </script>
 
 <style scoped>
+.search-details {
+  text-align: center;
+}
 .listings-container {
   max-width: 1000px;
   margin: 0 auto;
@@ -66,7 +80,7 @@ export default {
 .listing .salary, .listing .date, .listing .location {
   margin-bottom: 2px;
 }
-.listing a {
+.listing .button {
   background-color: rgba(26, 188, 156, 1.0);
   text-decoration: none;
   color: white;
@@ -77,5 +91,9 @@ export default {
   padding: 10px 0;
   border-radius: 10px;
   font-weight: bold;
+}
+
+.listing .inner-link {
+  color: black;
 }
 </style>

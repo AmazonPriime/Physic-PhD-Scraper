@@ -15,7 +15,15 @@ class AcademicPositionsScraper:
     def scrape(self):
         response = requests.get(SiteUrls.ACADEMICPOSITIONS)
         soup = BeautifulSoup(response.content, 'html.parser')
-        job_listings = soup.find(id='list-jobs-results').find_all(class_='list-group')
+        job_listings = soup.find(id='list-jobs-results')
+        if not job_listings:
+            print('Something went wrong here.')
+            print('-'*10)
+            print(job_listings)
+            print(soup)
+            print('-'*10)
+            return
+        job_listings = job_listings.find_all(class_='list-group')
         pages = soup.find_all(class_='page-link')
         if pages:
             pages = int(pages[-2].get_text())

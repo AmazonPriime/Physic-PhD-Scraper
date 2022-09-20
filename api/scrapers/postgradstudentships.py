@@ -17,6 +17,13 @@ class PostgradStudentshipsScraper:
         response = requests.get(SiteUrls.POSTGRADUATESTUDENTSHIPS)
         soup = BeautifulSoup(response.content, 'html.parser')
         job_listings = soup.find(class_='news-container')
+        if not job_listings:
+            print('Something went wrong here.')
+            print('-'*10)
+            print(job_listings)
+            print(soup)
+            print('-'*10)
+            return
         job_listings = job_listings.find_all(class_='news-item')
         pages = soup.find_all(class_='page-numbers')
         if len(pages) > 0:

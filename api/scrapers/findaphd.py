@@ -15,7 +15,15 @@ class FindAPhdScraper:
     def scrape(self):
         response = requests.get(SiteUrls.FINDAPHD)
         soup = BeautifulSoup(response.content, 'html.parser')
-        job_listings = soup.find(id='SearchResults').find_all(class_='phd-result-row-standard')
+        job_listings = soup.find(id='SearchResults')
+        if not job_listings:
+            print('Something went wrong here.')
+            print('-'*10)
+            print(job_listings)
+            print(soup)
+            print('-'*10)
+            return
+        job_listings = job_listings.find_all(class_='phd-result-row-standard')
         pages = int(soup.find(class_='pagination').find_all('li')[-1].get_text())
         for i in range(2, pages + 1):
             response = requests.get(SiteUrls.FINDAPHD + f'&PG={i}')

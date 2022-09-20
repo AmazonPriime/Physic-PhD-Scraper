@@ -14,7 +14,15 @@ class JobsacukScraper:
     def scrape(self):
         response = requests.get(SiteUrls.JOBSACUK)
         soup = BeautifulSoup(response.content, 'html.parser')
-        job_listings = soup.find(id='job-listings').find_all('div', recursive=False)
+        job_listings = soup.find(id='job-listings')
+        if not job_listings:
+            print('Something went wrong here.')
+            print('-'*10)
+            print(job_listings)
+            print(soup)
+            print('-'*10)
+            return
+        job_listings = job_listings.find_all('div', recursive=False)
         for job in job_listings:
             try:
                 title = job.a.get_text().strip()
