@@ -10,6 +10,7 @@ Sample of sites which will be used in the search API.
     * Fitlered to only show latest PhDs
 * [Research Gate](https://www.researchgate.net/jobs?regions=&page=1)
     * [Physics](https://www.researchgate.net/jobs/Physics-jobs)
+    * Found to not be as useful as the other ones that are implemented
 * [Academic Position](https://academicpositions.com/find-jobs/)
     * [Physics](https://academicpositions.com/find-jobs?positions[0]=phd&fields[0]=physics&locations[0]=europe)
 * [Euaxess](https://euraxess.ec.europa.eu/jobs/search)

@@ -21,9 +21,6 @@ class FindAPhdScraper:
             response = requests.get(SiteUrls.FINDAPHD + f'&PG={i}')
             soup = BeautifulSoup(response.content, 'html.parser')
             job_listings = job_listings + soup.find(id='SearchResults').find_all(class_='phd-result-row-standard')
-        
-        print(len(job_listings))
-
         for job in job_listings:
             title = job.h3.get_text().strip()
             link = f"{SiteUrls.FINDAPHD_ROOT}{job.a.get('href')}"
