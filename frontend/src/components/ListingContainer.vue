@@ -1,50 +1,85 @@
 <template>
   <div>
-    <div class="search-details">
-      Found <b>{{ jobs.length }}</b> positions!
+    <div class="filters">
+      <div>
+        <input
+          type="text"
+          class="filter-search"
+          placeholder="Search filter"
+          v-on:change="filter"
+        >
+      </div>
     </div>
     <div class="listings-container">
-      <div v-for="job in jobs" class="listing" v-bind:key="job.link">
-        <span class="title">
-          {{ job.title }}
-        </span>
-        <span class="employer">
-          Employer: <i>{{ job.employer }}</i>
-        </span>
-        <span class="description">
-          {{ job.description }}
-        </span>
-        <span class="location">
-          Location: <i>{{ job.location }}</i>
-        </span>
-        <span class="salary">
-          Salary: <i>{{ job.salary }}</i>
-        </span>
-        <span class="date">
-          Opened: <i>{{ job.date_placed }}</i>
-        </span>
-        <span class="date">
-          Closes: <i>{{ job.date_closes }}</i>
-        </span>
-        <span>
-          Website:
-          <a :href="job.link" class="inner-link">
-            <b>{{ job.link.match(/^https?\:\/\/([^\/?#]+)(?:[\/?#]|$)/i)[1] }}</b>
-          </a>
-        </span>
-        <a :href="job.link" target="_blank" class="button">
-          Show Listing
-        </a>
+      <div v-if="!showFiltered">
+        <div class="filter-details">
+          Found <b>{{ jobs.length }}</b> positions!
+        </div>
+        <Listing v-for="job in jobs" :job="job" v-bind:key="job.link" class="not-filtered" />
+        <div v-if="jobs.length === 0" class="no-listings">
+          Hmm there seems to be no listings?
+          <br />
+          <img src="https://media4.giphy.com/media/Y15VREpz6N6MaPflI2/200w.gif?cid=82a1493b3ohkbl3ph8rqkcp09xzr3m51b05y8yjtpvk7mxwl&rid=200w.gif&ct=g">
+        </div>
+      </div>
+      <div v-else>
+        <div class="filter-details">
+          <b>{{ filteredJobs.length }}</b> positions based on your filter!
+        </div>
+        <Listing v-for="job in filteredJobs" :job="job" v-bind:key="job.link" class="filtered" />
+        <div v-if="filteredJobs.length === 0" class="no-listings">
+          Hmm there seems to be no listings?
+          <br />
+          <img src="https://media4.giphy.com/media/Y15VREpz6N6MaPflI2/200w.gif?cid=82a1493b3ohkbl3ph8rqkcp09xzr3m51b05y8yjtpvk7mxwl&rid=200w.gif&ct=g">
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Listing from './Listing.vue';
+
 export default {
   name: 'ListingContainer',
+  components: {
+    Listing,
+  },
   props: {
     jobs: [],
+  },
+  data() {
+    return {
+      filteredJobs: [],
+      showFiltered: false,
+    };
+  },
+  methods: {
+    filter(event) {
+      const query = event.target.value.toLowerCase();
+      if (query.length === 0) {
+        this.filteredJobs = [];
+        this.showFiltered = false;
+        return;
+      }
+      const queryWords = query.split(' ');
+      const tempFilteredJobs = [];
+      this.jobs.forEach((job) => {
+        const title = job.title.toLowerCase();
+        const desc = job.description.toLowerCase();
+        const employer = job.employer.toLowerCase();
+        const location = job.location.toLowerCase();
+        queryWords.forEach((word) => {
+          const inTitleDesc = title.includes(word) || desc.includes(word);
+          const inEmployerLocation = employer.includes(word) || location.includes(word);
+          if ((inTitleDesc || inEmployerLocation) && word !== '') {
+            tempFilteredJobs.push(job);
+          }
+        });
+      });
+      this.filteredJobs = tempFilteredJobs;
+      this.showFiltered = true;
+    },
   },
 };
 </script>
@@ -57,43 +92,39 @@ export default {
   max-width: 1000px;
   margin: 0 auto;
 }
-.listing {
+.no-listings {
   margin: 20px;
   padding: 10px;
   background-color: rgba(189, 195, 199, 0.4);
   border-radius: 5px;
   backdrop-filter: blur(5px);
-}
-.listing span {
-  display: block;
-  margin-bottom: 10px;
-  font-size: 14px;
-}
-.listing .title {
-  font-weight: bold;
-  margin-bottom: 0;
-  font-size: 16px;
-}
-.listing .description {
-  font-size: 16px;
-}
-.listing .salary, .listing .date, .listing .location {
-  margin-bottom: 2px;
-}
-.listing .button {
-  background-color: rgba(26, 188, 156, 1.0);
-  text-decoration: none;
-  color: white;
-  display: block;
   text-align: center;
-  margin: 10px;
-  margin-bottom: 0;
-  padding: 10px 0;
-  border-radius: 10px;
-  font-weight: bold;
 }
-
-.listing .inner-link {
-  color: black;
+.no-listings img {
+  margin-top: 10px;
+}
+.filters {
+  gap: 1em;
+  margin: 0 auto;
+  margin-top: 10px;
+  background-color: rgba(189, 195, 199, 0.4);
+  backdrop-filter: blur(5px);
+  max-width: 1000px;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+}
+.filter-search {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid grey;
+  max-width: 500px;
+  width: 80%;
+  font-size: 16px;;
+  text-align: center;
+}
+.filter-details {
+  margin: 10px;
+  text-align: center;
 }
 </style>
