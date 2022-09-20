@@ -4,12 +4,13 @@ def clean_spaces(string):
     return re.sub(' +', ' ', string)
 
 class Listing:
-    def __init__(self, title, link, employer, location, salary, date_placed, date_closes) -> None:
+    def __init__(self, title, link, employer, location, salary, description, date_placed, date_closes) -> None:
         self.title = title
         self.link=link
         self.employer=employer
         self.location=location
         self.salary=salary
+        self.description=description
         self.date_placed=date_placed
         self.date_closes=date_closes
 

@@ -34,6 +34,7 @@ class JobsacukScraper:
                     employer,
                     location,
                     salary,
+                    '', # description not available from all listings page
                     date_placed,
                     date_closes,
                 ))

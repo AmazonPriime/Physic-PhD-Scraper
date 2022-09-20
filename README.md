@@ -6,7 +6,8 @@ Sample of sites which will be used in the search API.
 * [Jobs.ac.uk](http://jobs.ac.uk/phd)
     * [Physics](https://www.jobs.ac.uk/search/?keywords=&location=&placeId=&activeFacet=subDisciplineFacet&resetFacet=&sortOrder=1&pageSize=1000&startIndex=1&academicDisciplineFacet%5B0%5D=physical-and-environmental-sciences&subDisciplineFacet%5B0%5D=physics-and-astronomy&jobTypeFacet%5B0%5D=phds)
 * [Find a Phd](http://findaphd.com/)
-    * [Physics](https://www.findaphd.com/phds/united-kingdom/physics/?h0M7Wc10)
+    * [Physics](https://www.findaphd.com/phds/united-kingdom/physics/?h0M7Wc10&Show=M)
+    * Fitlered to only show latest PhDs
 * [Research Gate](https://www.researchgate.net/jobs?regions=&page=1)
     * [Physics](https://www.researchgate.net/jobs/Physics-jobs)
 * [Academic Position](https://academicpositions.com/find-jobs/)

@@ -14,6 +14,7 @@ def index():
         query = request.get_data(as_text=True)
         jobs = scrape_all()
         print(len(jobs))
+        print(jobs[0].export())
         return 'Yay successul POST request! ' + query, 200
 
     return 'API route only supports POST requests', 400
