@@ -21,13 +21,9 @@ jobs:
       - name: Install dependencies
         run: cd frontend/ && yarn
 
-      # Export API URL
-      - name: Export API URL
-        run: export VUE_APP_API_URL=https://phd.lukeh.xyz
-
       # Build the project
       - name: Build project
-        run: cd frontend/ && yarn build
+        run: cd frontend/ && export VUE_APP_API_URL=https://phd.lukeh.xyz && yarn build
 
       # Upload build folder for the deploy job
       - name: Upload build folder
