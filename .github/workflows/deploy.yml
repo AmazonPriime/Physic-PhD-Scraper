@@ -16,12 +16,16 @@ jobs:
       - uses: c-hive/gha-yarn-cache@v2
 
       # CD into API
-      - name: CD into API directory
-        run: cd api/
+      - name: CD into frontend directory
+        run: cd frontend/
 
       # Install dependencies
       - name: Install dependencies
         run: yarn
+
+      # Export API URL
+      - name: Export API URL
+        run: export VUE_APP_API_URL=https://phd.lukeh.xyz
 
       # Build the project
       - name: Build project
