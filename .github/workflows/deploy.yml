@@ -12,10 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      # CD into API
-      - name: CD into frontend directory
-        run: cd frontend/
-
       # Uses yarn caching
       - uses: c-hive/gha-yarn-cache@v2
         with:
@@ -23,7 +19,7 @@ jobs:
 
       # Install dependencies
       - name: Install dependencies
-        run: yarn
+        run: cd frontend/ && yarn
 
       # Export API URL
       - name: Export API URL
@@ -31,14 +27,14 @@ jobs:
 
       # Build the project
       - name: Build project
-        run: yarn build
+        run: cd frontend/ yarn build
 
       # Upload build folder for the deploy job
       - name: Upload build folder
         uses: actions/upload-artifact@v2
         with:
           name: build
-          path: dist/
+          path: frontend/dist/
 
   deploy:
     name: Deploy Project
@@ -53,7 +49,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: build
-          path: dist/
+          path: frontend/dist/
 
       # Deploy to github pages website
       - uses: JamesIves/github-pages-deploy-action@4.1.5
