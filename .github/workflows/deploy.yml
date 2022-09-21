@@ -18,6 +18,8 @@ jobs:
 
       # Uses yarn caching
       - uses: c-hive/gha-yarn-cache@v2
+        with:
+          directory: frontend
 
       # Install dependencies
       - name: Install dependencies
