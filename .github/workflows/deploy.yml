@@ -56,7 +56,7 @@ jobs:
         with:
           repository-name: AmazonPriime/amazonpriime.github.io
           branch: main
-          folder: dist
+          folder: frontend/dist
           target-folder: phd
           clean: true
           token: ${{ secrets.PAT }}
